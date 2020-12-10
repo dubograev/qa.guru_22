@@ -1,21 +1,28 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
 public class PracticeFormTests extends TestBase{
 
     @Test
+    @DisplayName("Successful fill registration form")
     void fillPracticeFormTest() {
-        open(testURL);
-        fillForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
-                subject1, subject2, hobby1, hobby2, picture, address, state, city);
-        submitForm();
-        verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
-                subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        step("Open students registration form", () -> open(testURL));
+        step("Fill the form", () -> {
+            fillForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+        step("Submit the form", () -> submitForm());
+        step("Verify submitted form", () -> {
+            verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
     }
 
     private void fillForm(String firstname, String lastname, String userEmail, String gender, String userNumber,
@@ -68,17 +75,19 @@ public class PracticeFormTests extends TestBase{
         $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
     }
 
-    //Тест на то, что обязательные поля выделяются красным, если они не заполнены
     @Test
-    void doNotFillForm() {
-        open(testURL);
-        submitForm();
-        $("#firstName").shouldHave(cssValue("border-color","rgb(220, 53, 69)"));
-        $("#lastName").shouldHave(cssValue("border-color","rgb(220, 53, 69)"));
-        $("#genterWrapper .custom-control-label").shouldHave(cssValue("color","rgba(220, 53, 69, 1)"));
-        $("#genterWrapper").$(".custom-control-label", 2).shouldHave(cssValue("color","rgba(220, 53, 69, 1)"));
-        $("#userNumber").shouldHave(cssValue("border-color","rgb(220, 53, 69)"));
+    @DisplayName("Unsuccessful fill registration form with incorrect number")
+    void unseccessfulfillPracticeFormTest() {
+        step("Open students registration form", () -> open(testURL));
+        step("Fill the form", () -> {
+            fillForm(firstname, lastname, userEmail, gender, firstname, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+        step("Submit the form", () -> submitForm());
+        step("Verify submitted form", () -> {
+            verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
     }
-
 
 }
