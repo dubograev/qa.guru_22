@@ -84,7 +84,7 @@ public class PracticeFormTests extends TestBase{
         $("#hobbiesWrapper").$(byText(hobby1)).click();
         $("#hobbiesWrapper").$(byText(hobby2)).click();
 
-        $("#uploadPicture").uploadFile(new File("src/test/java/resources/" + picture));
+        //$("#uploadPicture").uploadFile(new File("src/test/java/resources/" + picture));
         $("#currentAddress").val(address);
         $("#state").click();
         $("#stateCity-wrapper").$(byText(state)).click();
@@ -109,7 +109,7 @@ public class PracticeFormTests extends TestBase{
                 + " " + monthOfBirthday + "," + yearOfBirthday));
         $x("//td[text()='Subjects']").parent().shouldHave(text(subject1 + ", " + subject2));
         $x("//td[text()='Hobbies']").parent().shouldHave(text(hobby1 + ", " + hobby2));
-        $x("//td[text()='Picture']").parent().shouldHave(text(picture));
+        //$x("//td[text()='Picture']").parent().shouldHave(text(picture));
         $x("//td[text()='Address']").parent().shouldHave(text(address));
         $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
     }
