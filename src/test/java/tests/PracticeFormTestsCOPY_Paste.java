@@ -4,15 +4,17 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 @Feature("Practice form test")
 @Story("The form should work correctly")
-public class PracticeFormTests extends TestBase{
+public class PracticeFormTestsCOPY_Paste extends TestBase{
 
     String  testURL = "https://demoqa.com/automation-practice-form",
             firstname = "Joe",
@@ -35,8 +37,8 @@ public class PracticeFormTests extends TestBase{
             city = "Karnal";
 
     @Test
-    @DisplayName("Successful fill registration form")
-    void fillPracticeFormTest() {
+    @DisplayName("Successful fill registration form COPY_Paste")
+    void fillPracticeFormTestCOPY_Paste() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
             fillForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
@@ -50,8 +52,8 @@ public class PracticeFormTests extends TestBase{
     }
 
     @Test
-    @DisplayName("Successful fill registration form - copy")
-    void fillPracticeFormTestCopy() {
+    @DisplayName("Successful fill registration form - copy COPY_Paste")
+    void fillPracticeFormTestCopyCOPY_Paste() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
             fillForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
@@ -115,8 +117,8 @@ public class PracticeFormTests extends TestBase{
     }
 
     @Test
-    @DisplayName("Unsuccessful fill registration form with incorrect number")
-    void unseccessfulfillPracticeFormTest() {
+    @DisplayName("Unsuccessful fill registration form with incorrect number COPY_Paste")
+    void unseccessfulfillPracticeFormTestCOPY_Paste() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
             fillForm(firstname, lastname, userEmail, gender, firstname, monthOfBirthday, yearOfBirthday, dayOfBirthday,
@@ -130,8 +132,8 @@ public class PracticeFormTests extends TestBase{
     }
 
     @Test
-    @DisplayName("Unsuccessful fill registration form with incorrect number - copy")
-    void unseccessfulfillPracticeFormTestCopy() {
+    @DisplayName("Unsuccessful fill registration form with incorrect number - copy COPY_Paste")
+    void unseccessfulfillPracticeFormTestCopyCOPY_Paste() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
             fillForm(firstname, lastname, userEmail, gender, firstname, monthOfBirthday, yearOfBirthday, dayOfBirthday,
