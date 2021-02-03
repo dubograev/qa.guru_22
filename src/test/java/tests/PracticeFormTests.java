@@ -25,6 +25,21 @@ public class PracticeFormTests extends TestBase{
         });
     }
 
+    @Test
+    @DisplayName("Successful fill registration form - copy")
+    void fillPracticeFormTestCopy() {
+        step("Open students registration form", () -> open(testURL));
+        step("Fill the form", () -> {
+            fillForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+        step("Submit the form", () -> submitForm());
+        step("Verify submitted form", () -> {
+            verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+    }
+
     private void fillForm(String firstname, String lastname, String userEmail, String gender, String userNumber,
                           String monthOfBirthday, String yearOfBirthday, String dayOfBirthday, String subject1,
                           String subject2, String hobby1, String hobby2, String picture, String address, String state,
@@ -78,6 +93,21 @@ public class PracticeFormTests extends TestBase{
     @Test
     @DisplayName("Unsuccessful fill registration form with incorrect number")
     void unseccessfulfillPracticeFormTest() {
+        step("Open students registration form", () -> open(testURL));
+        step("Fill the form", () -> {
+            fillForm(firstname, lastname, userEmail, gender, firstname, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+        step("Submit the form", () -> submitForm());
+        step("Verify submitted form", () -> {
+            verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
+                    subject1, subject2, hobby1, hobby2, picture, address, state, city);
+        });
+    }
+
+    @Test
+    @DisplayName("Unsuccessful fill registration form with incorrect number - copy")
+    void unseccessfulfillPracticeFormTestCopy() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
             fillForm(firstname, lastname, userEmail, gender, firstname, monthOfBirthday, yearOfBirthday, dayOfBirthday,
