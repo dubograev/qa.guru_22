@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
@@ -142,6 +143,51 @@ public class PracticeFormTests extends TestBase{
             verifySubmittedForm(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday,
                     subject1, subject2, hobby1, hobby2, picture, address, state, city);
         });
+    }
+
+    @Test
+    @AllureId("#1544")
+    @DisplayName("Successful fill registration form")
+    void fillPracticeFormTestManualAutomated() {
+        step("Open students registration form", () -> open(testURL));
+        step("Fill the form", () -> {
+            fillFormShorted(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday);
+        });
+        step("Submit the form", () -> submitForm());
+        step("Verify submitted form", () -> {
+            verifySubmittedFormShorted(firstname, lastname, userEmail, gender, userNumber, monthOfBirthday, yearOfBirthday, dayOfBirthday);
+        });
+    }
+
+    private void fillFormShorted(String firstname, String lastname, String userEmail, String gender, String userNumber,
+                          String monthOfBirthday, String yearOfBirthday, String dayOfBirthday) {
+        $("#firstName").val(firstname);
+        $("#lastName").val(lastname);
+        $("#userEmail").val(userEmail);
+        $("#genterWrapper").$(byText(gender)).click();
+        $("#userNumber").val(userNumber);
+        //fill the Date of birth
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(monthOfBirthday);
+        $(".react-datepicker__year-select").selectOption(yearOfBirthday);
+        $(".react-datepicker__day--0" + dayOfBirthday).click();
+        //fill the Subject
+    }
+
+    private void verifySubmittedFormShorted(String firstname, String lastname, String userEmail, String gender, String userNumber,
+                                     String monthOfBirthday, String yearOfBirthday, String dayOfBirthday) {
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $x("//td[text()='Student Name']").parent().shouldHave(text(firstname + " " + lastname));
+        $x("//td[text()='Student Email']").parent().shouldHave(text(userEmail));
+        $x("//td[text()='Gender']").parent().shouldHave(text(gender));
+        $x("//td[text()='Mobile']").parent().shouldHave(text(userNumber));
+        $x("//td[text()='Date of Birth']").parent().shouldHave(text(dayOfBirthday
+                + " " + monthOfBirthday + "," + yearOfBirthday));
+        $x("//td[text()='Subjects']").parent().shouldHave(text(subject1 + ", " + subject2));
+        $x("//td[text()='Hobbies']").parent().shouldHave(text(hobby1 + ", " + hobby2));
+        //$x("//td[text()='Picture']").parent().shouldHave(text(picture));
+        $x("//td[text()='Address']").parent().shouldHave(text(address));
+        $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
     }
 
 }
