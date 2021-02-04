@@ -147,7 +147,7 @@ public class PracticeFormTests extends TestBase{
 
     @Test
     @AllureId("#1544")
-    @DisplayName("Successful fill registration form")
+    @DisplayName("Successful fill registration form with incorrect number - manual should be automated")
     void fillPracticeFormTestManualAutomated() {
         step("Open students registration form", () -> open(testURL));
         step("Fill the form", () -> {
