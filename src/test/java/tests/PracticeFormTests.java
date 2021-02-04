@@ -183,11 +183,6 @@ public class PracticeFormTests extends TestBase{
         $x("//td[text()='Mobile']").parent().shouldHave(text(userNumber));
         $x("//td[text()='Date of Birth']").parent().shouldHave(text(dayOfBirthday
                 + " " + monthOfBirthday + "," + yearOfBirthday));
-        $x("//td[text()='Subjects']").parent().shouldHave(text(subject1 + ", " + subject2));
-        $x("//td[text()='Hobbies']").parent().shouldHave(text(hobby1 + ", " + hobby2));
-        //$x("//td[text()='Picture']").parent().shouldHave(text(picture));
-        $x("//td[text()='Address']").parent().shouldHave(text(address));
-        $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
     }
 
 }
